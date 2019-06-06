@@ -1,0 +1,28 @@
+
+
+kafka.service
+
+[Unit]
+Description=Kafka Service
+Requires=kafka-zookeeper.service
+
+[Service]
+WorkingDirectory=/usr/local/kafka
+ExecStart=/usr/local/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/server.properties
+ExecStop=/usr/local/kafka/bin/kafka-server-stop.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+kafka-zookeeper.service
+[Unit]
+Description=Apache Zookeeper server (Kafka)
+Documentation=http://zookeeper.apache.org
+
+[Service]
+ExecStart=/usr/local/kafka/bin/zookeeper-server-start.sh /usr/local/kafka/config/zookeeper.properties
+ExecStop=/usr/local/kafka/bin/zookeeper-server-stop.sh
+
+[Install]
+WantedBy=multi-user.target
